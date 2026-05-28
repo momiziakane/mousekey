@@ -4,7 +4,7 @@
 
 
 注意
-Autohotkeyのv2の方をダウンロードする。
+事前にAutohotkeyのv2の方をダウンロードする。
 v1.1だと動かない。
 
 .gitattributesってやつは無視していい。
