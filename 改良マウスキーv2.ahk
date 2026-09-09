@@ -52,7 +52,7 @@ dispposition := 0
 
 
 ;ファンクションキー
-F12::MsgBox "v1.45"
+F12::MsgBox "v1.46"
 F1::KeyHistory()
 F2::{
  global displaymuki
