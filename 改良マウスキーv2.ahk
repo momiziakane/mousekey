@@ -7,6 +7,7 @@ velocity := [0,0]
 accel := 0.5
 displaymuki := 0
 dispposition := 0
+mauseswitch := 1
 
 
 ;テンキー
@@ -67,14 +68,30 @@ F3::{
  dispposition := mod(dispposition+1,2)
  MsgBox changemsg[dispposition+1]
 }
+F4::{
+ global mauseswitch
+ ToolTip
+ changemsg:=["無効化","有効化"]
+ mauseswitch := mod(mauseswitch+1,2)
+ MsgBox changemsg[mauseswitch+1] 
+}
 
 
 
 
 ;カーソルワープ
-NumpadAdd::MouseMove(1900,300)
-NumpadEnter::MouseMove(300,800)
-
+NumpadAdd::{
+ if displaymuki == 0
+  MouseMove(1900,300)
+ else if displaymuki == 1
+  MouseMove(1080-300,1900)
+}
+NumpadEnter::{
+ if displaymuki == 0
+  MouseMove(300,800)
+ if displaymuki == 1
+  MouseMove(1080-800,300)
+}
 
 ;終了　Ctrl+Alt+テンキー1
 ^!SC04F::{
@@ -85,6 +102,7 @@ NumpadEnter::MouseMove(300,800)
 
 
 SetTimer(Mouse, 10)
+
 
 
 
@@ -109,10 +127,11 @@ if dispposition==1
  else 
   velocity[1] := 0
 ;移動
- if displaymuki == 0
-  MouseMove(velocity[1], velocity[2], 0, "R")
- else if displaymuki == 1
-  MouseMove(-velocity[2], velocity[1], 0, "R")
+ if mauseswitch == 1
+  if displaymuki == 0
+   MouseMove(velocity[1], velocity[2], 0, "R")
+  else if displaymuki == 1
+   MouseMove(-velocity[2], velocity[1], 0, "R")
 ;減速、停止
  if velocity[1]**2 > 0.01
    velocity[1]*=0.95
